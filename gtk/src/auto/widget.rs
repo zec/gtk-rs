@@ -3284,16 +3284,14 @@ impl<O: IsA<Widget>> WidgetExt for O {
             let signal_name: &[u8] = detailed_signal_name
                 .as_ref()
                 .map_or(&b"child-notify\0"[..], |n| n.as_bytes());
-            let handler_id = connect_raw(
+            connect_raw(
                 self.as_ptr() as *mut _,
                 signal_name.as_ptr() as *const _,
                 Some(transmute::<_, unsafe extern "C" fn()>(
                     child_notify_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
-            );
-            drop(detailed_signal_name);
-            handler_id
+            )
         }
     }
 

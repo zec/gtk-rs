@@ -826,16 +826,14 @@ impl<O: IsA<Object>> AtkObjectExt for O {
             let signal_name: &[u8] = detailed_signal_name
                 .as_ref()
                 .map_or(&b"active-descendant-changed\0"[..], |n| n.as_bytes());
-            let handler_id = connect_raw(
+            connect_raw(
                 self.as_ptr() as *mut _,
                 signal_name.as_ptr() as *const _,
                 Some(transmute::<_, unsafe extern "C" fn()>(
                     active_descendant_changed_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
-            );
-            drop(detailed_signal_name);
-            handler_id
+            )
         }
     }
 
@@ -865,16 +863,14 @@ impl<O: IsA<Object>> AtkObjectExt for O {
             let signal_name: &[u8] = detailed_signal_name
                 .as_ref()
                 .map_or(&b"children-changed\0"[..], |n| n.as_bytes());
-            let handler_id = connect_raw(
+            connect_raw(
                 self.as_ptr() as *mut _,
                 signal_name.as_ptr() as *const _,
                 Some(transmute::<_, unsafe extern "C" fn()>(
                     children_changed_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
-            );
-            drop(detailed_signal_name);
-            handler_id
+            )
         }
     }
 
@@ -908,16 +904,14 @@ impl<O: IsA<Object>> AtkObjectExt for O {
             let signal_name: &[u8] = detailed_signal_name
                 .as_ref()
                 .map_or(&b"state-change\0"[..], |n| n.as_bytes());
-            let handler_id = connect_raw(
+            connect_raw(
                 self.as_ptr() as *mut _,
                 signal_name.as_ptr() as *const _,
                 Some(transmute::<_, unsafe extern "C" fn()>(
                     state_change_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
-            );
-            drop(detailed_signal_name);
-            handler_id
+            )
         }
     }
 

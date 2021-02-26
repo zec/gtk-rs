@@ -231,16 +231,14 @@ impl<O: IsA<ActionGroup>> ActionGroupExt for O {
             let signal_name: &[u8] = detailed_signal_name
                 .as_ref()
                 .map_or(&b"action-added\0"[..], |n| n.as_bytes());
-            let handler_id = connect_raw(
+            connect_raw(
                 self.as_ptr() as *mut _,
                 signal_name.as_ptr() as *const _,
                 Some(transmute::<_, unsafe extern "C" fn()>(
                     action_added_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
-            );
-            drop(detailed_signal_name);
-            handler_id
+            )
         }
     }
 
@@ -271,16 +269,14 @@ impl<O: IsA<ActionGroup>> ActionGroupExt for O {
             let signal_name: &[u8] = detailed_signal_name
                 .as_ref()
                 .map_or(&b"action-enabled-changed\0"[..], |n| n.as_bytes());
-            let handler_id = connect_raw(
+            connect_raw(
                 self.as_ptr() as *mut _,
                 signal_name.as_ptr() as *const _,
                 Some(transmute::<_, unsafe extern "C" fn()>(
                     action_enabled_changed_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
-            );
-            drop(detailed_signal_name);
-            handler_id
+            )
         }
     }
 
@@ -308,16 +304,14 @@ impl<O: IsA<ActionGroup>> ActionGroupExt for O {
             let signal_name: &[u8] = detailed_signal_name
                 .as_ref()
                 .map_or(&b"action-removed\0"[..], |n| n.as_bytes());
-            let handler_id = connect_raw(
+            connect_raw(
                 self.as_ptr() as *mut _,
                 signal_name.as_ptr() as *const _,
                 Some(transmute::<_, unsafe extern "C" fn()>(
                     action_removed_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
-            );
-            drop(detailed_signal_name);
-            handler_id
+            )
         }
     }
 
@@ -351,16 +345,14 @@ impl<O: IsA<ActionGroup>> ActionGroupExt for O {
             let signal_name: &[u8] = detailed_signal_name
                 .as_ref()
                 .map_or(&b"action-state-changed\0"[..], |n| n.as_bytes());
-            let handler_id = connect_raw(
+            connect_raw(
                 self.as_ptr() as *mut _,
                 signal_name.as_ptr() as *const _,
                 Some(transmute::<_, unsafe extern "C" fn()>(
                     action_state_changed_trampoline::<Self, F> as *const (),
                 )),
                 Box_::into_raw(f),
-            );
-            drop(detailed_signal_name);
-            handler_id
+            )
         }
     }
 }
